@@ -28,8 +28,9 @@ class Quotes(object):
         ccode = to_utf8(ccode)
         p = Price()
         return p.get(ccode)
-    
-    def get_historical_prices(self, ccode, range_type=DAILY, start_date=None, end_date=None, all=False):
+
+    def get_historical_prices(self, ccode, range_type=DAILY, start_date=None, end_date=None, all=False,
+                              interval=0.5, filename=None):
         """過去の株価情報を取得
         ccode: 証券コード
         range_type: 取得タイプ(RANGE_DAILY, RANGE_WEEKLY, RANGE_MONTHLY)
@@ -37,6 +38,8 @@ class Quotes(object):
         end_date: 取得終了日時(default: 今日)
         all: Trueなら全データ取得
         """
+        HistoricalPrices.INTERVAL = interval
+        HistoricalPrices.RESULT_FILE_NAME = filename
         ccode = to_utf8(ccode)
         if range_type == DAILY:
             p = HistoricalDailyPrices()

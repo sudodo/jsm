@@ -13,7 +13,16 @@ class PriceData(object):
     close: 終値
     volume: 出来高
     """
-    
+
+    def get_as_list(self):
+        """リスト形式で取得
+        [date, opening price, high price, low price, closing price, volume, adjusted price]
+        """
+        return [self.date.strftime('%Y-%m-%d'),
+                self.open, self.high, self.low,
+                self.close, self.volume, self._adj_close]
+
+
     def __init__(self, date, open, high, low, close, volume, adj_close):
         self.date = self._datetime(date) # 日時
         self.open = self._int(open) # 初値
